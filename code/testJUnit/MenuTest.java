@@ -3,10 +3,13 @@ package testJUnit;
 import Factory.PlatEnfantCreator;
 import Factory.PlatFactory;
 import Factory.PlatSanteCreator;
+import Observer.ObservateurPlat;
 import menufact.plats.PlatAuMenu;
+import menufact.plats.PlatChoisi;
 import menufact.plats.PlatEnfant;
 import menufact.plats.PlatSante;
 import org.junit.jupiter.api.Test;
+import menufact.facture.Facture;
 
 import menufact.Menu;
 
@@ -50,4 +53,20 @@ class MenuTest {
         assertEquals(20.0, platSante.getChol(), 0.001);
         assertEquals(5.0, platSante.getGras(), 0.001);
     }
+
+    @Test
+    public void testObserver(){
+        PlatFactory factory = new PlatEnfantCreator();
+        PlatAuMenu plat = factory.createPlat(1, "Plat Enfant", 10.0, 0.5);
+        PlatChoisi platChoisi = new PlatChoisi(plat, 8);
+        platChoisi.observateur.ajouterObservateur(new Facture("test"));
+
+        platChoisi.setQuantite(5);
+    }
+
+    @Test
+    public void testState(){
+        
+    }
 }
+

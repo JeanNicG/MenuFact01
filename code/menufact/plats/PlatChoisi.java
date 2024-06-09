@@ -1,14 +1,16 @@
 package menufact.plats;
 
-import menufact.plats.PlatAuMenu;
+import Observer.ObservateurPlat;
 
 public class PlatChoisi {
     private PlatAuMenu plat;
     private int quantite;
+    public ObservateurPlat observateur;
 
     public PlatChoisi(PlatAuMenu plat, int quantite) {
         this.plat = plat;
         this.quantite = quantite;
+        this.observateur = new ObservateurPlat();
     }
 
     @Override
@@ -25,9 +27,11 @@ public class PlatChoisi {
 
     public void setQuantite(int quantite) {
         this.quantite = quantite;
+        observateur.notifierObservateur(this);
     }
 
     public PlatAuMenu getPlat() {
         return plat;
     }
+
 }
