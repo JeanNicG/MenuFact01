@@ -10,6 +10,9 @@ import Memento.Caretaker;
 import State.Fermee;
 import State.Ouverte;
 import State.Payee;
+import ingredients.Ingredient;
+import ingredients.TypeIngredient;
+import inventaire.Inventaire;
 import menufact.facture.exceptions.FactureException;
 import menufact.plats.PlatAuMenu;
 import menufact.plats.PlatChoisi;
@@ -136,6 +139,5 @@ class MenuTest {
         caretaker.restoreState(facture);
         assertTrue(facture.getFactureState() instanceof Ouverte);
     }
-
 }
 

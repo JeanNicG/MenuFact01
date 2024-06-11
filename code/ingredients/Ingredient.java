@@ -1,9 +1,12 @@
 package ingredients;
 
+import FlyWeight.IngredientType;
+
 public class Ingredient {
     private String nom;
     private String description;
     private TypeIngredient typeIngredient;
+    private IngredientType ingredientType;
 
     public String getNom() {
         return nom;
@@ -27,5 +30,10 @@ public class Ingredient {
 
     public void setTypeIngredient(TypeIngredient typeIngredient) {
         this.typeIngredient = typeIngredient;
+    }
+
+    public Ingredient(String nom, String description) {
+        this.nom = nom;
+        this.description = description;
     }
 }

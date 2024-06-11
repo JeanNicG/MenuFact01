@@ -1,6 +1,11 @@
 package ingredients;
 
+import FlyWeight.IngredientFactory;
+import FlyWeight.IngredientType;
 import ingredients.exceptions.IngredientException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class IngredientInventaire {
     private IngredientInventaire ingredientInventaire;
@@ -22,4 +27,5 @@ public class IngredientInventaire {
         else
             this.quantite = quantite;
     }
+
 }
