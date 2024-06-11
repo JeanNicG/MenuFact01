@@ -1,6 +1,5 @@
-package menufact.State;
+package State;
 
-import menufact.State.FactureState;
 import menufact.facture.Facture;
 
 public class Payee extends FactureState {
@@ -10,16 +9,19 @@ public class Payee extends FactureState {
 
     @Override
     public void payer(){
+        facture.setFactureState(new Payee(facture));
         System.out.println("Payee");
     }
 
     @Override
     public void ouvrir(){
-        System.out.println("Facture deja ouverte");
+        facture.setFactureState(new Payee(facture));
+        System.out.println("Impossible d'ouvrir une facture payee");
     }
 
     @Override
     public void fermer(){
-        System.out.println("Facture ne peut pas etre fermee");
+        facture.setFactureState(new Fermee(facture));
+        System.out.println("Fermeture en cours...");
     }
 }
