@@ -1,4 +1,4 @@
-package menufact.State;
+package State;
 
 import menufact.facture.Facture;
 

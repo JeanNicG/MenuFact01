@@ -1,5 +1,8 @@
 package menufact.facture;
 
+import Memento.FactureMemento;
+import State.FactureState;
+import State.Ouverte;
 import menufact.Client;
 import menufact.facture.exceptions.FactureException;
 import menufact.plats.PlatChoisi;
@@ -20,6 +23,7 @@ public class Facture implements ObserverInterface {
     private ArrayList<PlatChoisi> platchoisi = new ArrayList<PlatChoisi>();
     private int courant;
     private Client client;
+    private FactureState factureState;
 
 
     /**********************Constantes ************/
@@ -70,14 +74,14 @@ public class Facture implements ObserverInterface {
      * Permet de chager l'état de la facture à PAYEE
      */
     public void payer() {
-        etat = FactureEtat.PAYEE;
+        factureState.payer();
     }
 
     /**
      * Permet de chager l'état de la facture à FERMEE
      */
     public void fermer() {
-        etat = FactureEtat.FERMEE;
+        factureState.fermer();
     }
 
     /**
@@ -86,10 +90,7 @@ public class Facture implements ObserverInterface {
      * @throws FactureException en cas que la facture soit PAYEE
      */
     public void ouvrir() throws FactureException {
-        if (etat == FactureEtat.PAYEE)
-            throw new FactureException("La facture ne peut pas être reouverte.");
-        else
-            etat = FactureEtat.OUVERTE;
+        factureState.ouvrir();
     }
 
     /**
@@ -107,6 +108,7 @@ public class Facture implements ObserverInterface {
         etat = FactureEtat.OUVERTE;
         courant = -1;
         this.description = description;
+        this.factureState = new Ouverte(this);
     }
 
     /**
@@ -171,4 +173,25 @@ public class Facture implements ObserverInterface {
     public void update(PlatChoisi plat) {
         System.out.println("Quantite de: " + plat.getPlat().getDescription() + " a ete changee pour: " + plat.getQuantite());
     }
+
+    public FactureState getFactureState() {
+        return factureState;
+    }
+
+    public void setFactureState(FactureState factureState) {
+        this.factureState = factureState;
+    }
+
+    public FactureMemento saveToMemento() {
+        return new FactureMemento(factureState);
+    }
+
+    public void restoreFromMemento(FactureMemento memento) {
+        factureState = memento.getEtat();
+    }
+
+    public ArrayList<PlatChoisi> getPlatchoisi() {
+        return platchoisi;
+    }
+
 }
