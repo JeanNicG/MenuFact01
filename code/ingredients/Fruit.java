@@ -1,7 +1,8 @@
 package ingredients;
 
 public class Fruit extends Ingredient{
-    public Fruit() {
+    public Fruit(String nom, String description) {
+        super(nom, description);
         setTypeIngredient(TypeIngredient.FRUIT);
     }
 }
